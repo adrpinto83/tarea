@@ -115,7 +115,7 @@ lanzar_dashboard() {
     echo -e "${BLUE}════════════════════════════════════════════════════════════════${NC}"
     echo ""
 
-    streamlit run dashboard/dashboard_streamlit.py
+    streamlit run dashboard/dashboard_3d_interactivo.py
 }
 
 # Función para mostrar ayuda
