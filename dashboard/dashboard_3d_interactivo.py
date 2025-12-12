@@ -516,14 +516,25 @@ if modo_operacion == "🎮 Control Manual Total":
     # Sección: Umbrales
     st.sidebar.markdown("#### ⚠️ Umbrales de Alarma")
 
-    umbral_bajo = st.sidebar.slider("Umbral Bajo (cm)", 10, 100, 30, 5, key="umb_bajo_manual")
-    
-    # Asegurar que el valor del umbral alto no supere la altura máxima para evitar un error de Streamlit
-    umbral_alto_actual = st.session_state.get('umb_alto_manual', 170)
-    if umbral_alto_actual > altura_max:
-        umbral_alto_actual = altura_max
-        
-    umbral_alto = st.sidebar.slider("Umbral Alto (cm)", 100, int(altura_max), umbral_alto_actual, 5, key="umb_alto_manual")
+    # Ajustar rangos dinámicamente según altura_max
+    umbral_bajo_max = min(100, int(altura_max * 0.5))
+    umbral_bajo = st.sidebar.slider("Umbral Bajo (cm)", 10, umbral_bajo_max, min(30, umbral_bajo_max), 5, key="umb_bajo_manual")
+
+    # Asegurar que el slider del umbral alto tenga un rango válido
+    umbral_alto_min = min(100, int(altura_max * 0.5))
+    umbral_alto_max = int(altura_max)
+
+    # Si min >= max, ajustar
+    if umbral_alto_min >= umbral_alto_max:
+        umbral_alto_min = int(altura_max * 0.4)
+
+    umbral_alto_actual = st.session_state.get('umb_alto_manual', min(170, umbral_alto_max))
+    if umbral_alto_actual > umbral_alto_max:
+        umbral_alto_actual = umbral_alto_max
+    if umbral_alto_actual < umbral_alto_min:
+        umbral_alto_actual = umbral_alto_min
+
+    umbral_alto = st.sidebar.slider("Umbral Alto (cm)", umbral_alto_min, umbral_alto_max, umbral_alto_actual, 5, key="umb_alto_manual")
 
     st.sidebar.markdown("---")
 
@@ -589,14 +600,25 @@ elif modo_operacion == "🔄 Simulación Física":
     st.sidebar.markdown("---")
     st.sidebar.markdown("### ⚠️ Umbrales")
 
-    umbral_bajo = st.sidebar.slider("Umbral Bajo (cm)", 10, 100, 30, 5, key="umb_bajo_sim")
-    
-    # Asegurar que el valor del umbral alto no supere la altura máxima para evitar un error de Streamlit
-    umbral_alto_actual = st.session_state.get('umb_alto_sim', 170)
-    if umbral_alto_actual > altura_max:
-        umbral_alto_actual = altura_max
+    # Ajustar rangos dinámicamente según altura_max
+    umbral_bajo_max = min(100, int(altura_max * 0.5))
+    umbral_bajo = st.sidebar.slider("Umbral Bajo (cm)", 10, umbral_bajo_max, min(30, umbral_bajo_max), 5, key="umb_bajo_sim")
 
-    umbral_alto = st.sidebar.slider("Umbral Alto (cm)", 100, int(altura_max), umbral_alto_actual, 5, key="umb_alto_sim")
+    # Asegurar que el slider del umbral alto tenga un rango válido
+    umbral_alto_min = min(100, int(altura_max * 0.5))
+    umbral_alto_max = int(altura_max)
+
+    # Si min >= max, ajustar
+    if umbral_alto_min >= umbral_alto_max:
+        umbral_alto_min = int(altura_max * 0.4)
+
+    umbral_alto_actual = st.session_state.get('umb_alto_sim', min(170, umbral_alto_max))
+    if umbral_alto_actual > umbral_alto_max:
+        umbral_alto_actual = umbral_alto_max
+    if umbral_alto_actual < umbral_alto_min:
+        umbral_alto_actual = umbral_alto_min
+
+    umbral_alto = st.sidebar.slider("Umbral Alto (cm)", umbral_alto_min, umbral_alto_max, umbral_alto_actual, 5, key="umb_alto_sim")
 
     st.sidebar.markdown("---")
     st.sidebar.markdown("### 🎯 Control de Válvulas")
