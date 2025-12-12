@@ -1,0 +1,30 @@
+# Dependencias del proyecto SCE Gemelo Digital
+# Python >= 3.8
+
+# Computación científica
+numpy>=1.21.0,<3.0.0
+scipy>=1.7.0,<2.0.0
+
+# Análisis de datos
+pandas>=1.3.0,<3.0.0
+
+# Machine Learning
+scikit-learn>=1.0.0,<2.0.0
+joblib>=1.1.0,<2.0.0
+
+# Visualización
+matplotlib>=3.4.0,<4.0.0
+plotly>=5.0.0,<7.0.0
+
+# Dashboard web
+streamlit>=1.25.0,<2.0.0
+
+# Base de datos
+# sqlite3 viene incluido en Python
+
+# Utilidades
+python-dateutil>=2.8.0
+
+# Dependencias adicionales de Streamlit
+altair>=4.0.0,<6.0.0
+pillow>=8.0.0,<11.0.0
